@@ -6,8 +6,10 @@ import 'package:quizapp/services/services.dart';
 import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/theme.dart';
 
-void main() {
+void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const App());
 }
 
