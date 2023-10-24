@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "588634968590",
+    "project_id": "diploma-engine-547be",
+    "storage_bucket": "diploma-engine-547be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588634968590:android:3b292510baf90403e8a25f",
+        "android_client_info": {
+          "package_name": "com.dip_engine.quizapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588634968590-okflhhad7p575h3qe2qcuf8ul8v2k244.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr7t3sH4QArOtrYoh9Apc0N6AphHD7tPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588634968590-okflhhad7p575h3qe2qcuf8ul8v2k244.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
