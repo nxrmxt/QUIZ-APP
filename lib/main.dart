@@ -5,11 +5,12 @@ import 'package:quizapp/routes.dart';
 import 'package:quizapp/services/services.dart';
 import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/theme.dart';
+import 'firebase_options.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const App());
 }
 

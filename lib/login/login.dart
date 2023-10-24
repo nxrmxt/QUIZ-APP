@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/home/home.dart';
 import 'package:quizapp/services/auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -15,6 +16,9 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            FloatingActionButton(onPressed: () {
+              Navigator.pushNamed(context, '/topics');
+            }),
             const FlutterLogo(
               size: 150,
             ),
