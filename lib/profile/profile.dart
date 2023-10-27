@@ -50,11 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ElevatedButton(
                 child: const Text('logout'),
                 onPressed: () async {
-                  await AuthService().signOut();
-                  if (mounted) {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/', (route) => false);
-                  }
+
+                  AuthService.signOut(context);
                 },
               ),
               const Spacer(),

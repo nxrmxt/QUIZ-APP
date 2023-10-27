@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/login/login.dart';
 import 'package:quizapp/services/auth.dart';
 import 'package:quizapp/shared/shared.dart';
 import 'package:quizapp/topics/topics.dart';
+
+import '../auth_screens/login/login.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         } else if (snapshot.hasData) {
           return const TopicsScreen();
         } else {
-          return const LoginScreen();
+          return const LogInScreen();
         }
       },
     );

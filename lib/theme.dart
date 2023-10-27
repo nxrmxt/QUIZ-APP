@@ -22,4 +22,5 @@ var appTheme = ThemeData(
     ),
   ),
   buttonTheme: const ButtonThemeData(),
+  useMaterial3: true,
 );

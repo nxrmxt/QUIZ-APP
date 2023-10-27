@@ -42,14 +42,18 @@ class _AppState extends State<App> {
             catchError: (_, err) => Report(),
             initialData: Report(),
             child: MaterialApp(
-                debugShowCheckedModeBanner: true,
+
+                debugShowCheckedModeBanner: false,
+                initialRoute: '/login',
                 routes: appRoutes,
                 theme: appTheme),
           );
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return const MaterialApp(home: LoadingScreen());
+        return const MaterialApp(
+            home: LoadingScreen()
+        );
       },
     );
   }

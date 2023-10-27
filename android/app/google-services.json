@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "588634968590-kmglgj65bc8jm0mnr4ag6pmkkcrk71ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dip_engine.quizapp",
+            "certificate_hash": "d82108a07c48f014c24efafb203b29215d0486d3"
+          }
+        },
+        {
           "client_id": "588634968590-okflhhad7p575h3qe2qcuf8ul8v2k244.apps.googleusercontent.com",
           "client_type": 3
         }
