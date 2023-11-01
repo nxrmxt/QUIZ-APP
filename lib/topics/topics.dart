@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizapp/services/firestore.dart';
 import 'package:quizapp/services/models.dart';
-import 'package:quizapp/shared/bottom_nav.dart';
 import 'package:quizapp/shared/error.dart';
 import 'package:quizapp/shared/loading.dart';
 import 'package:quizapp/topics/topic_item.dart';
@@ -36,15 +34,6 @@ class TopicsScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.deepPurple,
               title: const Text('Topics'),
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    FontAwesomeIcons.circleUser,
-                    color: Colors.pink[200],
-                  ),
-                  onPressed: () => Navigator.pushNamed(context, '/profile'),
-                )
-              ],
             ),
             //drawer: TopicDrawer(topics: topics),
             body: GridView.count(
@@ -54,7 +43,6 @@ class TopicsScreen extends StatelessWidget {
               crossAxisCount: 2,
               children: topics.map((topic) => TopicItem(topic: topic)).toList(),
             ),
-            bottomNavigationBar: const BottomNavBar(),
           );
         } else {
           return const Text('No topics found in Firestore. Check database');

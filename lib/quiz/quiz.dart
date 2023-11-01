@@ -210,8 +210,7 @@ class QuestionPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 18, color: Colors.white54),
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.green ),
+                style: ElevatedButton.styleFrom(primary: Colors.green),
                 child: Text(
                   correct ? 'Onward!' : 'Next',
                   style: const TextStyle(
@@ -223,7 +222,6 @@ class QuestionPage extends StatelessWidget {
                 onPressed: () {
                   if (correct) {
                     state.nextPage();
-
                   }
                   state.nextPage();
                   Navigator.pop(context);

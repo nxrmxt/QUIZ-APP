@@ -1,13 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizapp/home/home.dart';
-import 'package:quizapp/models/user_model.dart';
 import '../shared/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../topics/topics.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -34,12 +29,10 @@ class _LogInScreenState extends State<LogInScreen> {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 30),
-                child: Text('Log In',
-                  style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-
-                ),),
+                child: Text(
+                  'Log In',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -101,16 +94,12 @@ class _LogInScreenState extends State<LogInScreen> {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Divider(
-
-                        ), Text('Other Options'), Divider()],
+                        children: [Divider(), Text('Other Options'), Divider()],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        
                           InkWell(
                             onTap: () {
                               anonymousSignIn();
@@ -200,8 +189,6 @@ class _LogInScreenState extends State<LogInScreen> {
       return null;
     }
   }
-
-  
 
   void anonymousSignIn() {
     _auth.signInAnonymously().then((value) => {

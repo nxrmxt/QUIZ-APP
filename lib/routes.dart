@@ -1,7 +1,6 @@
 import 'package:quizapp/about/about.dart';
 import 'package:quizapp/auth_screens/sign_up_screen.dart';
 import 'package:quizapp/profile/profile.dart';
-import 'package:quizapp/topics/topics.dart';
 import 'package:quizapp/home/home.dart';
 
 import 'auth_screens/login.dart';
