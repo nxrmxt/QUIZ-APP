@@ -44,6 +44,7 @@ class Quiz {
 @JsonSerializable()
 class Topic {
   late final String id;
+  final String courseCode;
   final String title;
   final String description;
   final String img;
@@ -51,6 +52,7 @@ class Topic {
 
   Topic(
       {this.id = '',
+      this.courseCode = '',
       this.title = '',
       this.description = '',
       this.img = 'default.png',

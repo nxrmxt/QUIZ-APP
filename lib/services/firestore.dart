@@ -23,7 +23,7 @@ class FirestoreService {
     return Quiz.fromJson(snapshot.data() ?? {});
   }
 
-    /// Listens to current user's report document in Firestore
+  /// Listens to current user's report document in Firestore
   Stream<Report> streamReport() {
     return AuthService().userStream.switchMap((user) {
       if (user != null) {
@@ -47,6 +47,19 @@ class FirestoreService {
       }
     };
 
+    return ref.set(data, SetOptions(merge: true));
+  }
+
+  Future<Map<String, dynamic>?> getUserData() async {
+    var user = AuthService().user!;
+    var ref = _db.collection('users').doc(user.uid);
+    var snapshot = await ref.get();
+    return snapshot.data();
+  }
+
+  Future<void> updateUserData(Map<String, dynamic> data) async {
+    var user = AuthService().user!;
+    var ref = _db.collection('users').doc(user.uid);
     return ref.set(data, SetOptions(merge: true));
   }
 }

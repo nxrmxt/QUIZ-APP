@@ -1,3 +1,6 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quizapp/services/services.dart';
@@ -11,16 +14,43 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final CollectionReference _usersCollection =
+      FirebaseFirestore.instance.collection('users');
+
+  late User? _user;
+  Map<String, dynamic> _userData = {};
+
+  final bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _user = _auth.currentUser;
+    if (_user != null) {
+      _loadUserData(_user!.uid);
+    }
+  }
+
+  Future<void> _loadUserData(String userId) async {
+    final userDocument = await _usersCollection.doc(userId).get();
+    if (userDocument.exists) {
+      setState(() {
+        _userData = userDocument.data() as Map<String, dynamic>;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var report = Provider.of<Report>(context);
-    var user = AuthService().user;
 
-    if (user != null) {
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepOrange,
-          title: Text(user.displayName ?? 'Guest'),
+          title: Text(_userData['name'] ?? 'Guest'),
         ),
         body: Center(
           child: Column(
@@ -31,16 +61,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 width: 100,
                 height: 100,
                 margin: const EdgeInsets.only(top: 50),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: NetworkImage(user.photoURL ??
+                    image: NetworkImage(
                         'https://www.gravatar.com/avatar/placeholder'),
                   ),
                 ),
               ),
-              Text(user.email ?? '',
+              Text("Name: ${_userData['name']}" ?? '',
                   style: Theme.of(context).textTheme.headline6),
+              Text("Email: ${_userData['email']}" ?? '',
+                  style: Theme.of(context).textTheme.subtitle1),
+              Text("Phone: ${_userData['phone']}" ?? '',
+                  style: Theme.of(context).textTheme.subtitle1),
+              Text("College: ${_userData['college']}" ?? '',
+                  style: Theme.of(context).textTheme.subtitle1),
               const Spacer(),
               Text('${report.total}',
                   style: Theme.of(context).textTheme.headline2),
@@ -50,7 +86,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ElevatedButton(
                 child: const Text('logout'),
                 onPressed: () async {
-
                   AuthService.signOut(context);
                 },
               ),
@@ -59,8 +94,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       );
-    } else {
-      return const Loader();
     }
   }
-}
+

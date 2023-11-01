@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:quizapp/home/home.dart';
 import 'package:quizapp/models/user_model.dart';
-import '../../shared/text_field.dart';
+import 'package:quizapp/services/auth.dart';
+import '../shared/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../topics/topics.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -25,6 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _confirmPassword = TextEditingController();
   String? errorMessage;
   bool isVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,11 +36,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             const Padding(
               padding: EdgeInsets.only(top: 30),
-              child: Text('Sign Up Screen', style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold
-
-        ),),
+              child: Text(
+                'Sign Up Screen',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
             Container(
               padding: const EdgeInsets.all(20),
@@ -161,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               child: const Text('Sign Up'),
             ),
-             const Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [Divider(), Text('Other Options'), Divider()],
@@ -172,23 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    signInWithGoogle();
-                  },
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            image: AssetImage('assets/google.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    anonymousSignIn();
+                    AuthService.signInAnonymously(context);
                   },
                   child: Container(
                     width: 50,
@@ -228,7 +213,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.pushAndRemoveUntil(
                       (context),
                       MaterialPageRoute(
-                          builder: (context) => const TopicsScreen()),
+                          builder: (context) => const HomeScreen()),
                       (route) => false)
                 })
             .catchError((e) {
@@ -284,24 +269,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-  }
-
-  void signInWithGoogle() {
-    final provider = GoogleAuthProvider();
-    _auth.signInWithPopup(provider).then((value) => {
-          Navigator.pushAndRemoveUntil(
-              (context),
-              MaterialPageRoute(builder: (context) => const TopicsScreen()),
-              (route) => false)
-        });
-  }
-
-  void anonymousSignIn() {
-    _auth.signInAnonymously().then((value) => {
-          Navigator.pushAndRemoveUntil(
-              (context),
-              MaterialPageRoute(builder: (context) => const TopicsScreen()),
-              (route) => false)
-        });
   }
 }

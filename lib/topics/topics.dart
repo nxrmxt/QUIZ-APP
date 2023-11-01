@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quizapp/services/services.dart';
-import 'package:quizapp/shared/shared.dart';
-import 'package:quizapp/topics/drawer.dart';
+import 'package:quizapp/services/firestore.dart';
+import 'package:quizapp/services/models.dart';
+import 'package:quizapp/shared/bottom_nav.dart';
+import 'package:quizapp/shared/error.dart';
+import 'package:quizapp/shared/loading.dart';
 import 'package:quizapp/topics/topic_item.dart';
 
 class TopicsScreen extends StatelessWidget {
-  const TopicsScreen({super.key});
+  final String courseCode;
+  const TopicsScreen({super.key, required this.courseCode});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,14 @@ class TopicsScreen extends StatelessWidget {
             child: ErrorMessage(message: snapshot.error.toString()),
           );
         } else if (snapshot.hasData) {
-          var topics = snapshot.data!;
+          var topics = snapshot.data!
+              .where((topic) => topic.courseCode == courseCode)
+              .toList();
+
+          if (topics.isEmpty) {
+            return Container(
+                child: const Text('No topics found for this course'));
+          }
 
           return Scaffold(
             appBar: AppBar(
@@ -36,7 +46,7 @@ class TopicsScreen extends StatelessWidget {
                 )
               ],
             ),
-            drawer: TopicDrawer(topics: topics),
+            //drawer: TopicDrawer(topics: topics),
             body: GridView.count(
               primary: false,
               padding: const EdgeInsets.all(20.0),

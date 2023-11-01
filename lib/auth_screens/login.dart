@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:quizapp/home/home.dart';
 import 'package:quizapp/models/user_model.dart';
-import '../../shared/text_field.dart';
+import '../shared/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../topics/topics.dart';
+import '../topics/topics.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -108,22 +110,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              signInWithGoogle();
-                            },
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: const DecorationImage(
-                                      image: AssetImage('assets/google.png'),
-                                      fit: BoxFit.cover)),
-                            ),
-                          ),
+                        
                           InkWell(
                             onTap: () {
                               anonymousSignIn();
@@ -169,7 +156,7 @@ class _LogInScreenState extends State<LogInScreen> {
       try {
         _auth.signInWithEmailAndPassword(email: email, password: password).then(
             (value) => Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const TopicsScreen(),
+                  builder: (context) => const HomeScreen(),
                 )));
         // Successfully logged in
       } on FirebaseAuthException catch (error) {
@@ -214,21 +201,13 @@ class _LogInScreenState extends State<LogInScreen> {
     }
   }
 
-  void signInWithGoogle() {
-    final provider = GoogleAuthProvider();
-    _auth.signInWithPopup(provider).then((value) => {
-          Navigator.pushAndRemoveUntil(
-              (context),
-              MaterialPageRoute(builder: (context) => const TopicsScreen()),
-              (route) => false)
-        });
-  }
+  
 
   void anonymousSignIn() {
     _auth.signInAnonymously().then((value) => {
           Navigator.pushAndRemoveUntil(
               (context),
-              MaterialPageRoute(builder: (context) => const TopicsScreen()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
               (route) => false)
         });
   }

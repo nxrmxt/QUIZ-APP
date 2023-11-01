@@ -211,9 +211,9 @@ class QuestionPage extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: correct ? Colors.green : Colors.red),
+                    primary: Colors.green ),
                 child: Text(
-                  correct ? 'Onward!' : 'Try Again',
+                  correct ? 'Onward!' : 'Next',
                   style: const TextStyle(
                     color: Colors.white,
                     letterSpacing: 1.5,
@@ -223,7 +223,9 @@ class QuestionPage extends StatelessWidget {
                 onPressed: () {
                   if (correct) {
                     state.nextPage();
+
                   }
+                  state.nextPage();
                   Navigator.pop(context);
                 },
               ),

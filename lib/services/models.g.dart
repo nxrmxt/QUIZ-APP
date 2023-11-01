@@ -1,10 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'models.dart';
 
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
 
 Option _$OptionFromJson(Map<String, dynamic> json) => Option(
       value: json['value'] as String? ?? '',
@@ -55,6 +51,7 @@ Map<String, dynamic> _$QuizToJson(Quiz instance) => <String, dynamic>{
 Topic _$TopicFromJson(Map<String, dynamic> json) => Topic(
       id: json['id'] as String? ?? '',
       title: json['title'] as String? ?? '',
+      courseCode: json['courseCode'] as String? ?? '',
       description: json['description'] as String? ?? '',
       img: json['img'] as String? ?? 'default.png',
       quizzes: (json['quizzes'] as List<dynamic>?)

@@ -37,6 +37,13 @@
             {
               "client_id": "588634968590-okflhhad7p575h3qe2qcuf8ul8v2k244.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "588634968590-noum1aapq4jdagqb4o6i1v0f20bfap3b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dipengine.quizapp"
+              }
             }
           ]
         }
