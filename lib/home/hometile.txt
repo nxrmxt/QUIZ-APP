@@ -1,0 +1,52 @@
+  Padding(
+              padding: EdgeInsets.all(pad),
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const TopicsScreen(
+                        courseCode: 'Basic Physics',
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 2,
+                    ),
+                  ),
+                  height: size.height / 3,
+                  width: size.width / 1.1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Flexible(
+                        child: SizedBox(
+                          child: Image.asset(
+                            'assets/ph.jpeg',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: Text(
+                            "Basic Physics",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.fade,
+                            softWrap: false,
+                          ),
+                        ),
+                      ),
+                      // Flexible(child: TopicProgress(topic: topic)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
